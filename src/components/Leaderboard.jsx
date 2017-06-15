@@ -1,7 +1,5 @@
 import React from 'react';
-
 import '../stylesheets/_Leaderboard.scss';
-import '../stylesheets/index.scss';
 
 class Leaderboard extends React.Component {
 
