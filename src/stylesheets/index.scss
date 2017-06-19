@@ -7,8 +7,23 @@ body {
 }
 
 .container {
-  margin-top: 100px;
+  margin-bottom: 100px;
 
   display: flex;
   flex-direction: column;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 50px;
+  background: #fff;
+  a {
+    text-decoration: none;
+    color: $main-text-color;
+    &:hover {
+      color: #000;
+    }
+  }
 }

@@ -3,40 +3,35 @@
 .button-row {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 
   width: 80%;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto 10px;
   padding: 0 14px;
-  .button-container {
-    display: flex;
-    flex-direction: row;
+} // button-row end
+.nav {
+    border: none;
+    background: $second-bg-color;
 
-    width: 100%;
-    &:nth-child(2) {
-      justify-content: flex-end;
-    }
-    .nav {
-      border: none;
-      background: $second-bg-color;
+    padding: 10px;
+    margin: 0 5px;
+    width: 80px;
 
-      padding: 10px;
-      margin: 0 5px;
-      width: 80px;
-
-      font-family: inherit;
-      color: $main-text-color;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 400;
-    } // nav end
-    button {
-      cursor: pointer;
-      &:focus {
-        outline: none;
-        color: #000;
-      } // :focus end
-    } // button end
-  } // button-container end
-} // .button-row end
+    font-family: inherit;
+    color: $main-text-color;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+} // nav end
+.clickable {
+  cursor: pointer;
+  &:focus {
+    outline: 5px solid #fff;
+    color: #000;
+  } // :focus end
+} // button end
+.active {
+  background: $main-bg-color;
+  outline: 5px solid #fff;
+} // active end

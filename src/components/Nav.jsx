@@ -1,17 +1,33 @@
 import React from 'react';
 import '../stylesheets/_Nav.scss';
 
-const Nav = () => (
-  <div className="button-row">
-    <div className="button-container">
-      <div className="nav">Rank</div>
-      <div className="nav">Name</div>
-    </div>
-    <div className="button-container">
-      <button className="nav 30days">30 Days</button>
-      <button className="nav AllTime">All-Time</button>
-    </div>
-  </div>
-);
+class Nav extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: '30days',
+    };
+  }
+
+  setSelected(filter) {
+    this.setState({ selected: filter });
+  }
+
+  isActive(value) {
+    return `nav clickable ${(value === this.state.selected) ? 'active' : 'default'}`;
+  }
+
+  render() {
+    return (
+      <div className="button-row">
+        <div className="nav">Rank</div>
+        <div className="nav">Name</div>
+        <div className={this.isActive('30days')} onClick={() => this.setSelected('30days')} role="button" tabIndex={0}>30 Days</div>
+        <div className={this.isActive('allTime')} onClick={() => this.setSelected('allTime')} role="button" tabIndex={0}>All-Time</div>
+      </div>
+    );
+  }
+}
 
 export default Nav;
