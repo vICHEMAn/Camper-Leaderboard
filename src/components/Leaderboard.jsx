@@ -1,34 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
 import '../stylesheets/_Leaderboard.scss';
+import LeaderboardItem from './LeaderboardItem';
 
-class Leaderboard extends React.Component {
+class Leaderboard extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      requestFailed: false,
-      fccData: [],
+      fccRecent: [],
+      fccAlltime: [],
     };
+    this.fetchRecent = this.fetchRecent.bind(this);
+    this.fetchAllTime = this.fetchAllTime.bind(this);
   }
 
-  componentDidMount() {
-    fetch('https://fcctop100.herokuapp.com/api/fccusers/top/recent')
-    .then((response) => {
-      if (!response.ok) {
-        throw Error('Network request failed');
-      }
-      return response;
-    })
-    .then(data => data.json())
-    .then((data) => {
+  componentWillMount() {
+    axios.all([this.fetchRecent(), this.fetchAllTime()])
+    .then(axios.spread((recent, allTime) => {
       this.setState({
-        fccData: data,
+        fccRecent: recent.data,
+        fccAlltime: allTime.data,
       });
-    }, () => {
-      this.setState({
-        requestFailed: true,
-      });
-    });
+    }));
+  }
+
+  fetchRecent() {
+    return axios.get('https://fcctop100.herokuapp.com/api/fccusers/top/recent');
+  }
+
+  fetchAllTime() {
+    return axios.get('https://fcctop100.herokuapp.com/api/fccusers/top/alltime');
+  }
+
+  whichData() {
+    return (this.props.selected === '30days' ?
+    this.state.fccRecent :
+    this.state.fccAlltime
+    );
   }
 
   render() {
@@ -36,16 +45,7 @@ class Leaderboard extends React.Component {
       <div className="table-container">
         <table>
           <tbody>
-            {this.state.fccData.map((user, i) =>
-              (
-                <tr key={user.username}>
-                  <td><p>{i + 1}</p></td>
-                  <td><img src={user.img} alt="" /><p>{user.username}</p></td>
-                  <td className="td-active"><p>{user.recent}</p></td>
-                  <td><p>{user.alltime}</p></td>
-                </tr>
-              ),
-            )}
+            <LeaderboardItem data={this.whichData} selected={this.props.selected} />
           </tbody>
         </table>
       </div>

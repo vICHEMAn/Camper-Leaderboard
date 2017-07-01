@@ -11,6 +11,7 @@
   "author": "Victor Engström",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.16.2",
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
