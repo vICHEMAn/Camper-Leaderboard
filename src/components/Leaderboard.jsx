@@ -8,8 +8,8 @@ class Leaderboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fccRecent: [],
-      fccAlltime: [],
+      recent: [],
+      allTime: [],
     };
     this.fetchRecent = this.fetchRecent.bind(this);
     this.fetchAllTime = this.fetchAllTime.bind(this);
@@ -19,8 +19,8 @@ class Leaderboard extends Component {
     axios.all([this.fetchRecent(), this.fetchAllTime()])
     .then(axios.spread((recent, allTime) => {
       this.setState({
-        fccRecent: recent.data,
-        fccAlltime: allTime.data,
+        recent: recent.data,
+        allTime: allTime.data,
       });
     }));
   }
@@ -33,19 +33,21 @@ class Leaderboard extends Component {
     return axios.get('https://fcctop100.herokuapp.com/api/fccusers/top/alltime');
   }
 
-  whichData() {
-    return (this.props.selected === '30days' ?
-    this.state.fccRecent :
-    this.state.fccAlltime
-    );
-  }
-
   render() {
+    const currentArray = this.state[this.props.selected];
     return (
       <div className="table-container">
         <table>
           <tbody>
-            <LeaderboardItem data={this.whichData} selected={this.props.selected} />
+            {currentArray.map((camper, index) => (
+              <LeaderboardItem
+                camper={camper}
+                key={camper.username}
+                selected={this.props.selected}
+                number={index + 1}
+              />
+              ),
+            )}
           </tbody>
         </table>
       </div>

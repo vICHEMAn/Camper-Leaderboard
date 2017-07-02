@@ -1,24 +1,20 @@
 import React from 'react';
 
 const LeaderboardItem = (props) => {
-  if (props === undefined) {
-    return <td>Loading..</td>;
-  }
-
   return (
-    <tr key={props.data.user.username}>
+    <tr key={props.key}>
       <td>
-        <p>{i + 1}</p>
+        <p>{props.number}</p>
       </td>
       <td>
-        <img src={props.user.img} alt="" />
-        <p>{props.user.username}</p>
+        <img src={props.camper.img} alt="" />
+        <p>{props.camper.username}</p>
       </td>
-      <td className={(props.selected === '30days' ? 'td-active' : '')}>
-        <p>{props.data.user.recent}</p>
+      <td className={(props.selected === 'recent' ? 'td-active' : '')}>
+        <p>{props.camper.recent}</p>
       </td>
       <td className={(props.selected === 'allTime' ? 'td-active' : '')}>
-        <p>{props.data.user.alltime}</p>
+        <p>{props.camper.alltime}</p>
       </td>
     </tr>
   );

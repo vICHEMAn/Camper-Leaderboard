@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: '30days',
+      selected: 'recent',
     };
     this.setSelected = this.setSelected.bind(this);
   }

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import '../stylesheets/_Nav.scss';
 
 const Nav = ({ setSelected, selected }) => {
@@ -8,8 +8,8 @@ const Nav = ({ setSelected, selected }) => {
       <div className="nav">Rank</div>
       <div className="nav">Name</div>
       <div
-        className={isActive('30days')}
-        onClick={() => setSelected('30days')}
+        className={isActive('recent')}
+        onClick={() => setSelected('recent')}
         role="button"
         tabIndex={0}
       >30 Days</div>
@@ -21,11 +21,6 @@ const Nav = ({ setSelected, selected }) => {
       >All-Time</div>
     </div>
   );
-};
-
-Nav.propTypes = {
-  setSelected: PropTypes.func,
-  selected: PropTypes.string,
 };
 
 export default Nav;
